@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
 import {
   getAggregateStatus,
@@ -10,9 +11,10 @@ import type { StatusIndicatorValue } from "@/lib/types";
 interface Props {
   lastRefresh: string | null;
   indicators: StatusIndicatorValue[];
+  isLoggedIn?: boolean;
 }
 
-export function Header({ lastRefresh, indicators }: Props) {
+export function Header({ lastRefresh, indicators, isLoggedIn }: Props) {
   const aggregate = getAggregateStatus(indicators);
   const textColor = getStatusTextColor(aggregate.indicator);
   const allGood = aggregate.indicator === "none";
@@ -43,6 +45,12 @@ export function Header({ lastRefresh, indicators }: Props) {
             </div>
           )}
           <ThemeToggle />
+          <Link
+            href={isLoggedIn ? "/settings" : "/login"}
+            className="pixel-btn flex items-center self-stretch rounded-lg px-4 text-sm tracking-wider"
+          >
+            Customize
+          </Link>
         </div>
       </div>
 

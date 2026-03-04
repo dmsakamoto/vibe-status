@@ -56,6 +56,7 @@
   --color-sand: var(--sand);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-pixel: var(--font-pixel);
 }
 
 body {
@@ -157,6 +158,34 @@ body {
 .status-glow-orange { box-shadow: 0 0 16px color-mix(in srgb, var(--accent-orange) 25%, transparent); }
 .status-glow-red { box-shadow: 0 0 16px color-mix(in srgb, var(--accent-red) 35%, transparent); }
 .status-glow-blue { box-shadow: 0 0 16px color-mix(in srgb, var(--accent-blue) 25%, transparent); }
+
+/* Pixel game button */
+.pixel-btn {
+  font-family: var(--font-pixel), monospace;
+  background: var(--accent-orange);
+  color: #fff;
+  border: none;
+  box-shadow:
+    0 4px 0 color-mix(in srgb, var(--accent-orange) 70%, #000),
+    0 0 12px color-mix(in srgb, var(--accent-orange) 30%, transparent);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.1s ease;
+  image-rendering: pixelated;
+}
+
+.pixel-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 5px 0 color-mix(in srgb, var(--accent-orange) 70%, #000),
+    0 0 20px color-mix(in srgb, var(--accent-orange) 40%, transparent);
+}
+
+.pixel-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 0 color-mix(in srgb, var(--accent-orange) 70%, #000),
+    0 0 8px color-mix(in srgb, var(--accent-orange) 20%, transparent);
+}
 
 /* Ocean gradient background */
 .ocean-bg {

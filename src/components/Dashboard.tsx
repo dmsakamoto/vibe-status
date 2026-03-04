@@ -9,9 +9,11 @@ import type { DashboardData, ServiceStatus } from "@/lib/types";
 
 interface Props {
   initialData: DashboardData;
+  serviceKeys?: string[];
+  isLoggedIn?: boolean;
 }
 
-export function Dashboard({ initialData }: Props) {
+export function Dashboard({ initialData, serviceKeys, isLoggedIn }: Props) {
   const [services, setServices] = useState<ServiceStatus[]>(
     initialData.services
   );
@@ -19,7 +21,8 @@ export function Dashboard({ initialData }: Props) {
 
   const refresh = useCallback(async () => {
     try {
-      const res = await fetch("/api/status");
+      const params = serviceKeys ? `?keys=${serviceKeys.join(",")}` : "";
+      const res = await fetch(`/api/status${params}`);
       if (!res.ok) return;
       const data: DashboardData = await res.json();
       setServices(sortByWorstStatus(data.services));
@@ -27,7 +30,7 @@ export function Dashboard({ initialData }: Props) {
     } catch {
       // Silently ignore — will retry next interval
     }
-  }, []);
+  }, [serviceKeys]);
 
   usePolling(refresh, 60_000);
 
@@ -36,7 +39,7 @@ export function Dashboard({ initialData }: Props) {
   return (
     <div className="ocean-bg min-h-screen">
       <div className="mx-auto max-w-2xl space-y-4 px-5 py-8 sm:py-12">
-        <Header lastRefresh={fetchedAt} indicators={indicators} />
+        <Header lastRefresh={fetchedAt} indicators={indicators} isLoggedIn={isLoggedIn} />
         <div className="space-y-3">
           {services.map((service, i) => (
             <ServiceCard key={service.key} service={service} index={i} />
