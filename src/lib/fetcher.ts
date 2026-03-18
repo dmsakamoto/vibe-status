@@ -14,8 +14,9 @@ export async function fetchServiceStatus(
   const data: StatuspageResponse = await res.json();
 
   // Filter to showcase, non-group components
+  // incident.io pages lack showcase/group fields — default to showing all
   const components = data.components
-    .filter((c) => c.showcase && !c.group)
+    .filter((c) => c.showcase !== false && !c.group)
     .map((c) => ({
       id: c.id,
       name: c.name,
