@@ -20,6 +20,7 @@ export function ServicePicker({ initialKeys }: Props) {
   );
   const [saving, startSaving] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [saved, setSaved] = useState(false);
   const router = useRouter();
 
   function toggle(key: string) {
@@ -37,6 +38,7 @@ export function ServicePicker({ initialKeys }: Props) {
   function handleSave() {
     if (selected.size === 0) return;
     setError(null);
+    setSaved(false);
 
     startSaving(async () => {
       const res = await fetch("/api/user/services", {
@@ -50,7 +52,8 @@ export function ServicePicker({ initialKeys }: Props) {
         return;
       }
 
-      router.push("/");
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
       router.refresh();
     });
   }
@@ -74,12 +77,16 @@ export function ServicePicker({ initialKeys }: Props) {
         <p className="text-sm text-accent-red">{error}</p>
       )}
 
+      {saved && (
+        <p className="text-sm text-accent-green">Saved! Your dashboard has been updated.</p>
+      )}
+
       {categories.map((category) => (
         <div key={category} className="space-y-2">
           <h3 className="text-xs font-semibold uppercase tracking-wider text-muted">
             {category}
           </h3>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:grid-cols-3">
             {SERVICE_CATALOG.filter((s) => s.category === category).map(
               (service) => {
                 const isSelected = selected.has(service.key);

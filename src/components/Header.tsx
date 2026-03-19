@@ -54,7 +54,7 @@ export function Header({ lastRefresh, indicators, user }: Props) {
         </div>
         <div className="flex items-center gap-3">
           {lastRefresh && (
-            <div className="flex items-center gap-2">
+            <div className="hidden items-center gap-2 sm:flex">
               <span className="live-pulse inline-block h-1.5 w-1.5 rounded-full bg-accent-green" />
               <span className="font-mono text-[10px] text-muted">
                 {new Date(lastRefresh).toLocaleTimeString()}
@@ -127,12 +127,12 @@ export function Header({ lastRefresh, indicators, user }: Props) {
         <div className="flex items-center gap-3">
           <span className="text-2xl">{aggregate.emoji}</span>
           <div className="flex-1">
-            <span className={`text-lg font-bold ${textColor}`}>
+            <span className={`text-base font-bold sm:text-lg ${textColor}`}>
               {aggregate.label}
             </span>
-            <span className="ml-3 font-mono text-xs text-muted">
+            <span className="ml-2 font-mono text-[10px] text-muted sm:ml-3 sm:text-xs">
               {indicators.filter((i) => i === "none").length}/
-              {indicators.length} services healthy
+              {indicators.length} healthy
             </span>
           </div>
         </div>
