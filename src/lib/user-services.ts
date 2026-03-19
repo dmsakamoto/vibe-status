@@ -28,3 +28,23 @@ export async function setUserServiceKeys(
     ),
   ]);
 }
+
+export async function getUserSortPreference(
+  userId: string
+): Promise<"custom" | "severity"> {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { sortPreference: true },
+  });
+  return (user?.sortPreference as "custom" | "severity") ?? "severity";
+}
+
+export async function setUserSortPreference(
+  userId: string,
+  preference: "custom" | "severity"
+): Promise<void> {
+  await prisma.user.update({
+    where: { id: userId },
+    data: { sortPreference: preference },
+  });
+}
