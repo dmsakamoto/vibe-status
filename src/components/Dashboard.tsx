@@ -170,8 +170,20 @@ export function Dashboard({
           )}
         </div>
 
-        <footer className="pt-6 text-center text-xs text-muted">
-          polling every 60s &middot; powered by statuspage api
+        <footer className="pt-6 text-center text-xs text-muted space-y-1">
+          <p>polling every 60s &middot; powered by statuspage api</p>
+          <p>
+            Built with ❤️. If you have feedback, please{" "}
+            <a
+              href="https://github.com/dmsakamoto/vibe-status/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline transition-colors hover:text-foreground"
+            >
+              share
+            </a>
+            .
+          </p>
         </footer>
       </div>
     </div>
