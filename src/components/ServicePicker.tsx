@@ -8,7 +8,7 @@ interface Props {
   initialKeys: string[];
 }
 
-const MAX_SERVICES = 7;
+const MAX_SERVICES = 9;
 
 const categories = Array.from(
   new Set(SERVICE_CATALOG.map((s) => s.category))

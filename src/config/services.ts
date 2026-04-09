@@ -13,6 +13,7 @@ export const SERVICE_CATALOG: ServiceConfig[] = [
   // AI
   { key: "claude", name: "Claude", statusPageUrl: "https://status.claude.com", category: "AI" },
   { key: "openai", name: "OpenAI", statusPageUrl: "https://status.openai.com", category: "AI" },
+  { key: "codex", name: "Codex", statusPageUrl: "https://status.openai.com", category: "AI" },
   { key: "elevenlabs", name: "ElevenLabs", statusPageUrl: "https://status.elevenlabs.io", category: "AI" },
   { key: "gemini", name: "Gemini", statusPageUrl: "https://status.cloud.google.com", category: "AI", fetcherType: "google-incidents", fetcherConfig: { incidentsUrl: "https://status.cloud.google.com/incidents.json", productName: "Vertex Gemini API" } },
 
@@ -70,12 +71,14 @@ export const SERVICE_CATALOG: ServiceConfig[] = [
 
 export const DEFAULT_SERVICE_KEYS = [
   "claude",
+  "openai",
   "github",
   "vercel",
   "netlify",
   "npm",
   "linear",
   "figma",
+  "flyio",
 ];
 
 const catalogMap = new Map(SERVICE_CATALOG.map((s) => [s.key, s]));
